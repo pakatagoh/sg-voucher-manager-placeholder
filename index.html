@@ -227,30 +227,35 @@
             'oklch(0.60 0 0)',      // gray
         ];
 
-        // Handle button press animation on mobile
-        button.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            button.classList.add('pressed');
-        });
-
-        button.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            button.classList.remove('pressed');
-            clickCount++;
-            
-            if (clickCount === 50) {
-                createConfetti();
+        // Handle button press animation using pointer events (touch only)
+        button.addEventListener('pointerdown', function(e) {
+            if (e.pointerType === 'touch') {
+                button.classList.add('pressed');
             }
         });
 
-        button.addEventListener('touchcancel', function() {
-            button.classList.remove('pressed');
+        button.addEventListener('pointerup', function(e) {
+            if (e.pointerType === 'touch') {
+                button.classList.remove('pressed');
+            }
         });
 
-        // Handle click for desktop
+        button.addEventListener('pointercancel', function(e) {
+            if (e.pointerType === 'touch') {
+                button.classList.remove('pressed');
+            }
+        });
+
+        button.addEventListener('pointerleave', function(e) {
+            if (e.pointerType === 'touch') {
+                button.classList.remove('pressed');
+            }
+        });
+
+        // Handle click for counting
         button.addEventListener('click', function() {
             clickCount++;
-            
+
             if (clickCount === 50) {
                 createConfetti();
             }
