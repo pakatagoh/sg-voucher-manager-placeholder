@@ -143,16 +143,19 @@
             transform: translate(10px, 10px);
         }
 
-        button:active {
+        button:active,
+        button.pressed {
             background-color: var(--bauhaus-blue-dark);
             transform: translate(4px, 4px);
         }
 
-        .button-wrapper:has(button:active)::before {
+        .button-wrapper:has(button:active)::before,
+        .button-wrapper:has(button.pressed)::before {
             transform: translate(4px, 4px);
         }
 
-        .button-wrapper:has(button:active)::after {
+        .button-wrapper:has(button:active)::after,
+        .button-wrapper:has(button.pressed)::after {
             transform: translate(6px, 6px);
         }
 
@@ -215,12 +218,34 @@
     <script>
         let clickCount = 0;
         const button = document.getElementById('confettiButton');
+        const buttonWrapper = document.querySelector('.button-wrapper');
         const colors = [
             '#EF3340',              // Singapore red
             'oklch(0.15 0 0)',      // black
             'oklch(0.60 0 0)',      // gray
         ];
 
+        // Handle button press animation on mobile
+        button.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            button.classList.add('pressed');
+        });
+
+        button.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            button.classList.remove('pressed');
+            clickCount++;
+            
+            if (clickCount === 50) {
+                createConfetti();
+            }
+        });
+
+        button.addEventListener('touchcancel', function() {
+            button.classList.remove('pressed');
+        });
+
+        // Handle click for desktop
         button.addEventListener('click', function() {
             clickCount++;
             
