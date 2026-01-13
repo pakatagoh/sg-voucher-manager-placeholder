@@ -94,6 +94,13 @@
             -webkit-tap-highlight-color: transparent;
             display: block;
             z-index: 3; /* Button on top */
+            /* Prevent text selection */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            /* Prevent double-tap zoom on mobile */
+            touch-action: manipulation;
         }
 
         /* 3D depth effect using wrapper pseudo-elements - GPU accelerated */
