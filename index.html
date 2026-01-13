@@ -237,6 +237,7 @@
         button.addEventListener('pointerup', function(e) {
             if (e.pointerType === 'touch') {
                 button.classList.remove('pressed');
+                button.blur(); // Remove focus to reset color
             }
         });
 
