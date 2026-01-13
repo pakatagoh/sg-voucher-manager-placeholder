@@ -132,17 +132,19 @@
             z-index: 1; /* Gray shadow back */
         }
 
-        button:hover {
-            background-color: var(--bauhaus-blue-dark);
-            transform: translate(-2px, -2px);
-        }
+        @media (hover: hover) and (pointer: fine) {
+            button:hover {
+                background-color: var(--bauhaus-blue-dark);
+                transform: translate(-2px, -2px);
+            }
 
-        .button-wrapper:hover::before {
-            transform: translate(6px, 6px);
-        }
+            .button-wrapper:hover::before {
+                transform: translate(6px, 6px);
+            }
 
-        .button-wrapper:hover::after {
-            transform: translate(10px, 10px);
+            .button-wrapper:hover::after {
+                transform: translate(10px, 10px);
+            }
         }
 
         button:active,
